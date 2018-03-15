@@ -1,0 +1,30 @@
+{
+  "name": "lvl-shoper",
+  "version": "0.0.1",
+  "description": "shoper script",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --mode development --history-api-fallback",
+    "build": "webpack --mode production",
+    "deploy": "webpack --mode production && firebase deploy"
+  },
+  "dependencies": {
+    "firebase": "^4.11.0",
+    "html-webpack-plugin": "^3.0.6",
+    "material-ui": "^0.20.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.2.0",
+    "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-saga": "^0.16.0",
+    "ts-loader": "^4.0.1",
+    "typescript": "^2.7.2",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12",
+    "webpack-dev-server": "^3.1.1"
+  }
+}
