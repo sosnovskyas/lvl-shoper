@@ -22,8 +22,8 @@ const GoodsListComponent: React.SFC<IGoodsListProps> = (props: IGoodsListProps):
       <Table >
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell>status</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>Status</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
