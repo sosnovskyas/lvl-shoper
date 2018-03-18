@@ -5,7 +5,11 @@ import {
   FIREBASE_SIGNOUT_REQUEST,
   FIREBASE_SIGNIN_SUCCESS,
   FIREBASE_SIGNOUT_SUCCESS,
-  FIREBASE_SIGNOUT_FAILED, FIREBASE_CONNECTED, FIREBASE_DISCONNECTED, FIREBASE_USER_UNAUTH, FIREBASE_USER_AUTH
+  FIREBASE_SIGNOUT_FAILED,
+  FIREBASE_CONNECTED,
+  FIREBASE_DISCONNECTED,
+  FIREBASE_USER_UNAUTH,
+  FIREBASE_USER_AUTH
 } from './firebase-constants';
 import {
   IFirebaseSignInRequestAction,
@@ -65,8 +69,9 @@ export const firebaseSignOutFailed = (error: string): IFirebaseSignOutFaildActio
 /*
 * AUTH
 * */
-export const firebaseUserAuth = (user: firebase.User): Action => ({
-  type: FIREBASE_USER_AUTH
+export const firebaseUserAuth = (user: firebase.User): Action & {payload: firebase.User} => ({
+  type: FIREBASE_USER_AUTH,
+  payload: user
 });
 
 export const firebaseUserUnAuth = (): Action => ({

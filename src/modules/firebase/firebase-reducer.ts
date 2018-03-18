@@ -2,7 +2,10 @@ import {
   FIREBASE_CONNECTED,
   FIREBASE_DISCONNECTED,
   FIREBASE_SIGNIN_FAILED, FIREBASE_SIGNIN_REQUEST,
-  FIREBASE_SIGNIN_SUCCESS, FIREBASE_SIGNOUT_REQUEST, FIREBASE_SIGNOUT_SUCCESS
+  FIREBASE_SIGNIN_SUCCESS,
+  FIREBASE_SIGNOUT_REQUEST,
+  FIREBASE_SIGNOUT_SUCCESS,
+  FIREBASE_USER_AUTH
 } from './firebase-constants';
 import {IFirebaseSignInSuccessAction, IFirebaseState} from './firebase-types';
 
@@ -64,6 +67,13 @@ export const firebase = (state: IFirebaseState = firebaseInitialState, action: I
         ...state,
         user: undefined,
         inProgress: false
+      }
+    }
+
+    case FIREBASE_USER_AUTH: {
+      return {
+        ...state,
+        user: action.payload
       }
     }
 
