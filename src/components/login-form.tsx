@@ -27,6 +27,12 @@ const LoginFormComponent: React.SFC<ILoginFormProps> =
           <CircularProgress/>
         </div>
       );
+    } else if (inProgress) {// firebse offline
+      return (
+        <div style={style}>
+          <CircularProgress/>
+        </div>
+      );
     } else if (user) { // user logged in
       return (
         <div style={style}>
