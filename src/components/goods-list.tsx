@@ -1,12 +1,13 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
+import {IGoodsListItem} from '../modules/goods/goods-types';
 import {IApplicationState} from '../modules/store/store-types';
 import {Paper, Table, TableHead, TableBody, TableRow, TableCell} from 'material-ui';
 import {GoodsListItem} from './goods-list-item';
 
 export interface IGoodsListProps extends Dispatch<any> {
-
+  list: IGoodsListItem[];
 }
 
 const GoodsListComponent: React.SFC<IGoodsListProps> = (props: IGoodsListProps): React.ReactElement<IGoodsListProps> => {
@@ -34,6 +35,8 @@ const GoodsListComponent: React.SFC<IGoodsListProps> = (props: IGoodsListProps):
   );
 };
 
-const mapStateToProps = (state: IApplicationState) => ({});
+const mapStateToProps = (state: IApplicationState) => ({
+  ...state.goods
+});
 
 export const GoodsList = connect(mapStateToProps)(GoodsListComponent);

@@ -7,9 +7,12 @@ export interface IGoodsListItemProps {
 
 export const GoodsListItem: React.SFC<IGoodsListItemProps> = (props: IGoodsListItemProps): React.ReactElement<IGoodsListItemProps> => {
   const {item} = props;
+  const _onClick = () => {
+    console.log(item);
+  };
 
   return (
-    <TableRow>
+    <TableRow onClick={_onClick}>
       <TableCell>{item.name}</TableCell>
       <TableCell>{item.status}</TableCell>
     </TableRow>
