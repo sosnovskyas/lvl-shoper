@@ -6,4 +6,5 @@ export interface IGoodsListItem {
 
 export interface IGoodsState {
   list: IGoodsListItem[];
+  loading: boolean;
 }

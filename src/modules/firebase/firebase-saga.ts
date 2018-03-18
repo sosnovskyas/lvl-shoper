@@ -9,10 +9,6 @@ import {
 import {FIREBASE_SIGNIN_REQUEST, FIREBASE_SIGNOUT_REQUEST} from './firebase-constants';
 import {firebaseApp} from './firebase-module'
 
-function* signIn(email: string, password: string) {
-  return firebaseApp.auth().signInWithEmailAndPassword(email, password);
-}
-
 function* firebaseSignIn(action: Action & { payload: any }) {
   try {
     const {email, password} = action.payload;
@@ -25,13 +21,9 @@ function* firebaseSignIn(action: Action & { payload: any }) {
   }
 }
 
-function* signOut() {
-  return firebaseApp.auth().signOut();
-}
-
 function* firebaseSignOut(action: Action) {
   try {
-    yield call(signOut);
+    yield call([firebaseApp.auth(),firebaseApp.auth().signOut]);
     yield put(firebaseSignOutSuccess());
   } catch (error) {
     yield put(firebaseSignOutFailed(error));
