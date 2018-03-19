@@ -5,12 +5,14 @@ import {combineReducers} from 'redux';
 import {goods} from '../goods/goods-reducer';
 import {loginForm} from '../login-form/login-form-reducer';
 import {firebase} from '../firebase/firebase-reducer';
+import {mainMenu} from '../main-menu/main-menu-reducer';
 import {IApplicationState} from './store-types';
 
 export const reducers: Reducer<IApplicationState> = combineReducers({
   firebase,
   loginForm,
-  goods
+  goods,
+  mainMenu
 });
 
 export const sagaMiddleware = createSagaMiddleware();

@@ -4,13 +4,12 @@ import {IGoodsListItem} from '../modules/goods/goods-types';
 
 export interface IGoodsListItemProps {
   item: IGoodsListItem;
+  onClick: Function;
 }
 
 export const GoodsListItem: React.SFC<IGoodsListItemProps> = (props: IGoodsListItemProps): React.ReactElement<IGoodsListItemProps> => {
   const {item} = props;
-  const _onClick = () => {
-    console.log(item);
-  };
+  const _onClick = () => props.onClick(item);
 
   return (
     <TableRow onClick={_onClick}>

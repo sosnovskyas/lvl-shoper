@@ -1,10 +1,16 @@
 import {forIn} from 'lodash';
-import {GOODS_LIST_UPDATED} from './goods-constants';
+import {GOODS_EDIT_WINDOW_OPEN, GOODS_LIST_UPDATED, GOODS_NEW_WINDOW_OPEN} from './goods-constants';
 import {IGoodsListItem, IGoodsState} from './goods-types';
 
 const goodsInitialState: IGoodsState = {
   list: [],
-  loading: false
+  loading: false,
+  modal: {
+    isOpen: false,
+    name: '',
+    status: '',
+    key: undefined
+  }
 };
 
 export const goods = (state: IGoodsState = goodsInitialState, action: any) => {
@@ -23,6 +29,29 @@ export const goods = (state: IGoodsState = goodsInitialState, action: any) => {
       return {
         ...state,
         list
+      };
+    }
+
+    case GOODS_NEW_WINDOW_OPEN: {
+      return {
+        ...state,
+        modal: {
+          ...state.modal,
+          isOpen: true,
+          name: '',
+          status: '',
+          key: undefined,
+        }
+      };
+    }
+    case GOODS_EDIT_WINDOW_OPEN: {
+      return {
+        ...state,
+        modal: {
+          ...state.modal,
+          ...action.payload,
+          isOpen: true
+        }
       };
     }
 

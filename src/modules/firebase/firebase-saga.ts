@@ -1,5 +1,6 @@
 import {Action} from 'redux';
 import {call, cps, put, takeEvery} from 'redux-saga/effects';
+import {GOODS_EDIT_WINDOW_SAVE} from '../goods/goods-constants';
 import {
   firebaseSignInFailed,
   firebaseSignInSuccess,
@@ -31,7 +32,19 @@ function* firebaseSignOut(action: Action) {
   }
 }
 
+function* firebaseEditItem(action: Action) {
+  try {
+    yield call(console.log, action);
+    // yield call([firebaseApp.auth(),firebaseApp.auth().signOut]);
+    // yield put(firebaseSignOutSuccess());
+  } catch (error) {
+    // yield put(firebaseSignOutFailed(error));
+    // yield call(console.log, `firebaseSignOut:`, error);
+  }
+}
+
 export function* firebaseSaga(): any {
   yield takeEvery(FIREBASE_SIGNIN_REQUEST, firebaseSignIn);
   yield takeEvery(FIREBASE_SIGNOUT_REQUEST, firebaseSignOut);
+  yield takeEvery(GOODS_EDIT_WINDOW_SAVE, firebaseEditItem);
 }
