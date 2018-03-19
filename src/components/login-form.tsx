@@ -34,11 +34,7 @@ const LoginFormComponent: React.SFC<ILoginFormProps> =
         </div>
       );
     } else if (user) { // user logged in
-      return (
-        <div style={style}>
-          {user.displayName} ({user.email})
-          <Button onClick={signOut}>SignOut</Button>
-        </div>)
+      return null;
     } else {
       return (
         <div style={style}>

@@ -7,6 +7,7 @@ import {mainMenuClose, mainMenuToggle} from '../modules/main-menu/main-menu-acti
 import {IMainMenuProps} from '../modules/main-menu/main-menu-types';
 import {Menu as MenuIcon} from 'material-ui-icons';
 import {IApplicationState} from '../modules/store/store-types';
+import {Indicator} from './indicator';
 
 const MainMenuComponent: React.SFC<IMainMenuProps> = (props: IMainMenuProps): React.ReactElement<IMainMenuProps> => {
   let anchorEl: HTMLElement = null;
@@ -15,7 +16,7 @@ const MainMenuComponent: React.SFC<IMainMenuProps> = (props: IMainMenuProps): Re
   const onOpen = () => props.dispatch(mainMenuToggle());
 
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Toolbar>
         <IconButton
           id='menu'
@@ -33,6 +34,7 @@ const MainMenuComponent: React.SFC<IMainMenuProps> = (props: IMainMenuProps): Re
         <Typography variant="title" color="inherit">
           Title
         </Typography>
+        <Indicator/>
       </Toolbar>
 
     </AppBar>);

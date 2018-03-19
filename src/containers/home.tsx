@@ -24,7 +24,6 @@ class HomeContainer extends React.Component<IHomeContainerProps> {
 
     return (
       <div style={this._style}>
-        <h1>Home <Indicator/></h1>
         <LoginForm/>
         {connected && user ? <GoodsList/> : null}
       </div>

@@ -2,7 +2,6 @@ import * as React from 'react';
 import {connect, DispatchProp} from 'react-redux';
 import {MainMenu} from './components/main-menu';
 import {Home} from './containers/home';
-import {firebaseSignOut} from './modules/firebase/firebase-actions';
 import {IApplicationState} from './modules/store/store-types';
 
 export interface IAppContainerProps extends DispatchProp<any> {
