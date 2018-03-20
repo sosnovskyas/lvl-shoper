@@ -6,7 +6,7 @@ import {
   goodsEditWindowOpen,
   goodsEditWindowSave,
   goodsListUpdated,
-  goodsNewWindowOpen
+  goodsNewWindowOpen, goodsWindowChange
 } from '../modules/goods/goods-actions';
 import {IGoodsListItem} from '../modules/goods/goods-types';
 import {store} from '../modules/store/store-module';
@@ -28,6 +28,7 @@ import {
 } from 'material-ui';
 import {CreateNewFolder} from 'material-ui-icons';
 import {GoodsListItem} from './goods-list-item';
+import {GoodsItemWindow} from './goods-list-item-window';
 
 export interface IGoodsListProps extends DispatchProp<any> {
   dispatch: Dispatch<any>;
@@ -46,34 +47,14 @@ Goods.on('value', (snapshot: firebase.database.DataSnapshot) => {
 });
 
 const GoodsListComponent: React.SFC<IGoodsListProps> = (props: IGoodsListProps): React.ReactElement<IGoodsListProps> => {
-  const {loading, list, modal, dispatch} = props;
-  const onSaveClick = () =>     dispatch(goodsEditWindowSave());
+  const {loading, list, dispatch} = props;
   // Goods.push({name: String(Math.random()), status: 'ok'})
   //
   // };
   const onEditClick = (item: IGoodsListItem) => {
     dispatch(goodsEditWindowOpen(item));
   };
-  const onModalChange = (event: any) => {
-    console.log('change', event, event.target.id, event.target.value);
-  };
-  const modalStyle: React.CSSProperties = {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
-  };
-  const modalWrappreStyle: React.CSSProperties = {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    border: '1px solid gray',
-    borderRadius: '5px',
-    padding: '10px',
-    boxShadow: '10px 10px 5px 0px rgba(0,0,0,0.75)'
-  };
+
   const _onClickNew = () => {
     dispatch(goodsNewWindowOpen())
   };
@@ -104,27 +85,7 @@ const GoodsListComponent: React.SFC<IGoodsListProps> = (props: IGoodsListProps):
             </TableBody>
           </Table>
         </Paper>
-        <Modal open={modal.isOpen} style={modalStyle}>
-          <div style={modalWrappreStyle}>
-            <TextField
-              id={'name'}
-              label={'Name'}
-              value={modal.name}
-              onChange={onModalChange}
-            />
-            <Select
-              id={'status'}
-              placeholder={'Status'}
-              value={modal.status}
-              onChange={onModalChange}
-            >
-              <MenuItem selected={true}>ok</MenuItem>
-              <MenuItem>bad</MenuItem>
-              <MenuItem>good</MenuItem>
-            </Select>
-            <Button onClick={onSaveClick}>Save</Button>
-          </div>
-        </Modal>
+        <GoodsItemWindow/>
       </React.Fragment>
     );
   }
