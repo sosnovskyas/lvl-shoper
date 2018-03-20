@@ -18,9 +18,10 @@ export const goodsNewWindowOpen = (): Action => ({
 });
 
 export const goodsEditWindowOpen = (payload: IGoodsListItem): Action & { payload: IGoodsListItem } => ({
-  type: GOODS_EDIT_WINDOW_OPEN,
-  payload
-});
+    type: GOODS_EDIT_WINDOW_OPEN,
+    payload
+  })
+;
 
 export const goodsEditWindowSave = (payload: IGoodsListItem): Action & { payload: IGoodsListItem } => ({
   type: GOODS_WINDOW_SAVE,

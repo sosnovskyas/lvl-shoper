@@ -14,11 +14,11 @@ export interface IGoodsItemWindowProps extends DispatchProp<any> {
   isOpen: boolean;
   name: string;
   status: string;
-  key: string;
+  id: string;
 }
 
 const GoodsItemWindowComponent: React.SFC<IGoodsItemWindowProps> = (props: IGoodsItemWindowProps): React.ReactElement<IGoodsItemWindowProps> => {
-    const {dispatch, isOpen, name, status, key} = props;
+    const {dispatch, isOpen, name, status, id} = props;
     const statusList = ['Хотелки', 'Заявка подана', 'Заявка одобрено', 'Заявка оплачена', 'Заказ в обработке', 'Заказ собран', 'Заказ доставлен', 'Схичено'];
     const modalStyle: React.CSSProperties = {
       display: 'flex',
@@ -37,11 +37,7 @@ const GoodsItemWindowComponent: React.SFC<IGoodsItemWindowProps> = (props: IGood
       padding: '10px',
       boxShadow: '10px 10px 5px 0px rgba(0,0,0,0.75)'
     };
-    const onSaveClick = () => dispatch(goodsEditWindowSave({
-      name,
-      status,
-      key
-    }));
+    const onSaveClick = () => dispatch(goodsEditWindowSave({name, status, id}));
     const onModalChange = (event: any) => {
       const {name, value} = event.target;
 
@@ -50,7 +46,7 @@ const GoodsItemWindowComponent: React.SFC<IGoodsItemWindowProps> = (props: IGood
     return (
       <Modal open={isOpen} style={modalStyle}>
         <div style={modalWrappreStyle}>
-          {key}
+          key: {id ? id : 'NEW'}
           <TextField
             name='name'
             label='Name'

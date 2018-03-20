@@ -14,7 +14,7 @@ const goodsInitialState: IGoodsState = {
     isOpen: false,
     name: '',
     status: '',
-    key: undefined
+    id: undefined
   }
 };
 
@@ -27,7 +27,7 @@ export const goods = (state: IGoodsState = goodsInitialState, action: any) => {
       forIn(action.payload, (item: IGoodsListItem, index: string) => {
         list.push({
           ...item,
-          key: index
+          id: index
         })
       });
 
@@ -45,7 +45,7 @@ export const goods = (state: IGoodsState = goodsInitialState, action: any) => {
           isOpen: true,
           name: '',
           status: '',
-          key: undefined,
+          id: undefined,
         }
       };
     }
@@ -73,8 +73,7 @@ export const goods = (state: IGoodsState = goodsInitialState, action: any) => {
         ...state,
         modal: {
           ...state.modal,
-          isOpen: false,
-          ...action.payload
+          isOpen: false
         }
       };
     }

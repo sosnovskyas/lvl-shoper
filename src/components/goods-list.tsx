@@ -38,7 +38,7 @@ export interface IGoodsListProps extends DispatchProp<any> {
     isOpen: boolean;
     name: string;
     status: string;
-    key: string;
+    id: string;
   };
 }
 
@@ -48,16 +48,8 @@ Goods.on('value', (snapshot: firebase.database.DataSnapshot) => {
 
 const GoodsListComponent: React.SFC<IGoodsListProps> = (props: IGoodsListProps): React.ReactElement<IGoodsListProps> => {
   const {loading, list, dispatch} = props;
-  // Goods.push({name: String(Math.random()), status: 'ok'})
-  //
-  // };
-  const onEditClick = (item: IGoodsListItem) => {
-    dispatch(goodsEditWindowOpen(item));
-  };
-
-  const _onClickNew = () => {
-    dispatch(goodsNewWindowOpen())
-  };
+  const _onEditClick = (item: IGoodsListItem) => dispatch(goodsEditWindowOpen(item));
+  const _onClickNew = () => dispatch(goodsNewWindowOpen());
 
   if (loading) {
     return (<CircularProgress/>);
@@ -81,7 +73,7 @@ const GoodsListComponent: React.SFC<IGoodsListProps> = (props: IGoodsListProps):
               </TableRow>
             </TableHead>
             <TableBody>
-              {list.map((item: IGoodsListItem) => <GoodsListItem key={item.key} item={item} onClick={onEditClick}/>)}
+              {list.map((item: IGoodsListItem) => <GoodsListItem key={item.id} item={item} onClick={_onEditClick}/>)}
             </TableBody>
           </Table>
         </Paper>

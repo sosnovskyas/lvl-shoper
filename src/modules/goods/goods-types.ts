@@ -1,5 +1,5 @@
 export interface IGoodsListItem {
-  key: string;
+  id: string;
   name: string;
   status: string;
 }
@@ -7,10 +7,7 @@ export interface IGoodsListItem {
 export interface IGoodsState {
   list: IGoodsListItem[];
   loading: boolean;
-  modal: {
+  modal: IGoodsListItem & {
     isOpen: boolean;
-    name: string;
-    status: string;
-    key: string;
   };
 }
