@@ -1,0 +1,11 @@
+{
+  "name": "lvl-shoper",
+  "short_name": "lvl-shoper",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fff",
+  "description": "Закупки",
+  "related_applications": [{
+    "platform": "web"
+  }]
+}
