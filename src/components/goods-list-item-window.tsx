@@ -19,7 +19,7 @@ export interface IGoodsItemWindowProps extends DispatchProp<any> {
 
 const GoodsItemWindowComponent: React.SFC<IGoodsItemWindowProps> = (props: IGoodsItemWindowProps): React.ReactElement<IGoodsItemWindowProps> => {
     const {dispatch, isOpen, name, status, id} = props;
-    const statusList = ['Хотелки', 'Заявка подана', 'Одобрено', 'Оплачена', 'В обработке', 'Заказ собран', 'Доставлен', 'Схичено'];
+    const statusList = ['Хотелки', 'Заявка подана', 'Одобрено', 'Оплачена', 'В обработке', 'Заказ собран', 'Ожидает доставки', 'Доставлен', 'Схичено'];
     const modalStyle: React.CSSProperties = {
       display: 'flex',
       flexDirection: 'column',
