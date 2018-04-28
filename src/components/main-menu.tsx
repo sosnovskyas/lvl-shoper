@@ -10,13 +10,14 @@ import {IApplicationState} from '../modules/store/store-types';
 import {Indicator} from './indicator';
 
 const MainMenuComponent: React.SFC<IMainMenuProps> = (props: IMainMenuProps): React.ReactElement<IMainMenuProps> => {
-  let anchorEl: HTMLElement = null;
   const signOut = () => props.dispatch((firebaseSignOut()));
   const onClose = () => props.dispatch((mainMenuClose()));
   const onOpen = () => props.dispatch(mainMenuToggle());
 
   return (
-    <AppBar position="sticky">
+    <AppBar position="fixed" style={{
+      marginBottom: 160
+    }}>
       <Toolbar>
         <IconButton
           id='menu'
@@ -32,7 +33,7 @@ const MainMenuComponent: React.SFC<IMainMenuProps> = (props: IMainMenuProps): Re
           <MenuItem onClick={signOut}>SignOut</MenuItem>
         </Menu>
         <Typography variant="title" color="inherit">
-          Title
+          FAECORY-SHOPER
         </Typography>
         <Indicator/>
       </Toolbar>

@@ -1,26 +1,27 @@
-import {forIn} from 'lodash';
+import { forIn } from "lodash";
 import {
   GOODS_EDIT_WINDOW_OPEN,
   GOODS_LIST_UPDATED,
   GOODS_NEW_WINDOW_OPEN,
-  GOODS_WINDOW_CHANGE, GOODS_WINDOW_SAVE
-} from './goods-constants';
-import {IGoodsListItem, IGoodsState} from './goods-types';
+  GOODS_WINDOW_CANCEL,
+  GOODS_WINDOW_CHANGE,
+  GOODS_WINDOW_SAVE
+} from "./goods-constants";
+import { IGoodsListItem, IGoodsState } from "./goods-types";
 
 const goodsInitialState: IGoodsState = {
   list: [],
   loading: false,
   modal: {
     isOpen: false,
-    name: '',
-    status: '',
+    name: "",
+    status: "",
     id: undefined
   }
 };
 
 export const goods = (state: IGoodsState = goodsInitialState, action: any) => {
   switch (action.type) {
-
     case GOODS_LIST_UPDATED: {
       let list: IGoodsListItem[] = [];
 
@@ -28,7 +29,7 @@ export const goods = (state: IGoodsState = goodsInitialState, action: any) => {
         list.push({
           ...item,
           id: index
-        })
+        });
       });
 
       return {
@@ -43,9 +44,9 @@ export const goods = (state: IGoodsState = goodsInitialState, action: any) => {
         modal: {
           ...state.modal,
           isOpen: true,
-          name: '',
-          status: '',
-          id: undefined,
+          name: "",
+          status: "Хотелки",
+          id: undefined
         }
       };
     }
@@ -69,6 +70,15 @@ export const goods = (state: IGoodsState = goodsInitialState, action: any) => {
       };
     }
     case GOODS_WINDOW_SAVE: {
+      return {
+        ...state,
+        modal: {
+          ...state.modal,
+          isOpen: false
+        }
+      };
+    }
+    case GOODS_WINDOW_CANCEL: {
       return {
         ...state,
         modal: {

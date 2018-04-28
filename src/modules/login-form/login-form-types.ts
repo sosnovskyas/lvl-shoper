@@ -1,3 +1,4 @@
+import * as firebase from 'firebase';
 import {DispatchProp} from 'react-redux';
 import {Action} from 'redux';
 

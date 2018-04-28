@@ -1,41 +1,49 @@
-import * as Firebase from 'firebase';
-import {store} from '../store/store-module';
+import * as firebase from 'firebase';
+import * as Firebase from "firebase";
+import { store } from "../store/store-module";
 import {
   firebaseConnected,
   firebaseDisonnected,
   firebaseUserAuth,
   firebaseUserUnAuth
-} from './firebase-actions';
+} from "./firebase-actions";
+import { Action } from "redux";
 
 export const firebaseApp = Firebase.initializeApp({
-  apiKey: 'AIzaSyB4CSUOnrOogteHnL1BcnZSOlrexhsw4yk',
-  authDomain: 'lvl-shoper.firebaseapp.com',
-  databaseURL: 'https://lvl-shoper.firebaseio.com',
-  projectId: 'lvl-shoper',
-  storageBucket: 'lvl-shoper.appspot.com',
-  messagingSenderId: '263939525766'
+  apiKey: "AIzaSyB4CSUOnrOogteHnL1BcnZSOlrexhsw4yk",
+  authDomain: "lvl-shoper.firebaseapp.com",
+  databaseURL: "https://lvl-shoper.firebaseio.com",
+  projectId: "lvl-shoper",
+  storageBucket: "lvl-shoper.appspot.com",
+  messagingSenderId: "263939525766"
 });
 export const firebaseDb: firebase.database.Database = firebaseApp.database();
-export const Goods: firebase.database.Reference = firebaseDb.ref('goods');
+export const Goods: firebase.database.Reference = firebaseDb.ref("goods");
 
-Firebase.auth().onAuthStateChanged((user) => {
+Firebase.auth().onAuthStateChanged(user => {
   if (user) {
     // User is signed in.
-    store.dispatch(firebaseUserAuth(user))
+    store.dispatch(firebaseUserAuth(user));
   } else {
     // User is signed out.
-    store.dispatch(firebaseUserUnAuth())
+    store.dispatch(firebaseUserUnAuth());
   }
 });
 
-export const dbConnectedRef = firebaseDb.ref('.info/connected');
+export const dbConnectedRef = firebaseDb.ref(".info/connected");
 
-dbConnectedRef.on('value', (snapshot) => {
-  const isConnected: boolean = snapshot.val();
+dbConnectedRef.on(
+  "value",
+  snapshot => {
 
-  store.dispatch(isConnected ? firebaseConnected() : firebaseDisonnected());
-}, this);
+    const isConnected: Action = snapshot.val()
+      ? firebaseConnected()
+      : firebaseDisonnected();
 
+    store.dispatch(isConnected);
+  },
+  this
+);
 
 // Firebase.auth().signInWithEmailAndPassword('lvlonstradamus@gmail.com', '15091984')
 //   .then((value) => console.log(value))

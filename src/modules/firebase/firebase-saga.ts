@@ -33,23 +33,7 @@ function* firebaseSignOut(action: Action) {
   }
 }
 
-function* firebaseEditItem(action: Action & { payload: IGoodsListItem }) {
-  try {
-    const {id, status, name} = action.payload;
-
-    if (id) {
-      yield call([Goods.child(id), Goods.child(id).set], {status, name});
-    } else {
-      yield call([Goods, Goods.push], {status, name});
-    }
-  } catch (error) {
-    yield call(console.log, `firebaseEditItem: error -`, error);
-
-  }
-}
-
 export function* firebaseSaga(): any {
   yield takeEvery(FIREBASE_SIGNIN_REQUEST, firebaseSignIn);
   yield takeEvery(FIREBASE_SIGNOUT_REQUEST, firebaseSignOut);
-  yield takeEvery(GOODS_WINDOW_SAVE, firebaseEditItem);
 }

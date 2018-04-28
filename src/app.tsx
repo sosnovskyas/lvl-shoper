@@ -1,8 +1,11 @@
-import * as React from 'react';
-import {connect, DispatchProp} from 'react-redux';
-import {MainMenu} from './components/main-menu';
-import {Home} from './containers/home';
-import {IApplicationState} from './modules/store/store-types';
+import * as firebase from "firebase";
+import CircularProgress from "material-ui/es/Progress/CircularProgress";
+import * as React from "react";
+import { connect, DispatchProp } from "react-redux";
+import { LoginForm } from "./components/login-form";
+import { MainMenu } from "./components/main-menu";
+import { Home } from "./containers/home";
+import { IApplicationState } from "./modules/store/store-types";
 
 export interface IAppContainerProps extends DispatchProp<any> {
   user: firebase.User;
@@ -11,13 +14,18 @@ export interface IAppContainerProps extends DispatchProp<any> {
 
 class AppContainer extends React.Component<IAppContainerProps> {
   public render() {
-    return (
-      <React.Fragment>
-        <MainMenu />
-        <Home/>
-      </React.Fragment>
-
-    );
+    if (!this.props.connected) {
+      return <CircularProgress />;
+    } else if (this.props.user) {
+      return (
+        <React.Fragment>
+          <MainMenu />
+          <Home />
+        </React.Fragment>
+      );
+    } else {
+      return <LoginForm />;
+    }
   }
 }
 

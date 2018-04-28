@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 //noinspection JSUnresolvedVariable
 module.exports = {
@@ -25,6 +26,9 @@ module.exports = {
         new HtmlWebPackPlugin({
             template: './src/index.html',
             filename: './index.html'
+        }),
+        new ManifestPlugin({
+            filename: 'manifest.json'
         })
     ]
 };

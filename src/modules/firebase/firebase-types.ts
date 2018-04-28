@@ -1,3 +1,4 @@
+import * as firebase from 'firebase';
 import {Action} from 'redux';
 
 export interface IFirebaseState {

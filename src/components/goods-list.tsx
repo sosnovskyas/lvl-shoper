@@ -1,16 +1,18 @@
-import * as React from 'react';
-import {connect, DispatchProp} from 'react-redux';
-import {Dispatch} from 'redux';
-import {Goods} from '../modules/firebase/firebase-module';
+import * as firebase from "firebase";
+import * as React from "react";
+import { connect, DispatchProp } from "react-redux";
+import { Dispatch } from "redux";
+import { Goods } from "../modules/firebase/firebase-module";
 import {
   goodsEditWindowOpen,
   goodsEditWindowSave,
   goodsListUpdated,
-  goodsNewWindowOpen, goodsWindowChange
-} from '../modules/goods/goods-actions';
-import {IGoodsListItem} from '../modules/goods/goods-types';
-import {store} from '../modules/store/store-module';
-import {IApplicationState} from '../modules/store/store-types';
+  goodsNewWindowOpen,
+  goodsWindowChange
+} from "../modules/goods/goods-actions";
+import { IGoodsListItem } from "../modules/goods/goods-types";
+import { store } from "../modules/store/store-module";
+import { IApplicationState } from "../modules/store/store-types";
 import {
   Paper,
   Table,
@@ -25,10 +27,10 @@ import {
   Select,
   InputLabel,
   MenuItem
-} from 'material-ui';
-import {CreateNewFolder} from 'material-ui-icons';
-import {GoodsListItem} from './goods-list-item';
-import {GoodsItemWindow} from './goods-list-item-window';
+} from "material-ui";
+import { CreateNewFolder } from "material-ui-icons";
+import { GoodsListItem } from "./goods-list-item";
+import { GoodsItemWindow } from "./goods-list-item-window";
 
 export interface IGoodsListProps extends DispatchProp<any> {
   dispatch: Dispatch<any>;
@@ -42,45 +44,48 @@ export interface IGoodsListProps extends DispatchProp<any> {
   };
 }
 
-Goods.on('value', (snapshot: firebase.database.DataSnapshot) => {
+Goods.on("value", (snapshot: firebase.database.DataSnapshot) => {
   store.dispatch(goodsListUpdated(snapshot.val()));
 });
 
-const GoodsListComponent: React.SFC<IGoodsListProps> = (props: IGoodsListProps): React.ReactElement<IGoodsListProps> => {
-  const {loading, list, dispatch} = props;
-  const _onEditClick = (item: IGoodsListItem) => dispatch(goodsEditWindowOpen(item));
+const GoodsListComponent: React.SFC<IGoodsListProps> = (
+  props: IGoodsListProps
+): React.ReactElement<IGoodsListProps> => {
+  const { loading, list, dispatch } = props;
+  const _onEditClick = (item: IGoodsListItem) =>
+    dispatch(goodsEditWindowOpen(item));
   const _onClickNew = () => dispatch(goodsNewWindowOpen());
+  const addButtonStyle: React.CSSProperties = {
+    marginTop: -56
+  };
 
-  if (loading) {
-    return (<CircularProgress/>);
-  } else {
-    return (
-      <React.Fragment>
-        <Button
-          variant="fab"
-          color="primary"
-          aria-label="add"
-          onClick={_onClickNew}
-        >
-          <CreateNewFolder/>
-        </Button>
-        <Paper>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Status</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {list.map((item: IGoodsListItem) => <GoodsListItem key={item.id} item={item} onClick={_onEditClick}/>)}
-            </TableBody>
-          </Table>
-        </Paper>
-        <GoodsItemWindow/>
-      </React.Fragment>
-    );
-  }
+  return (
+    <React.Fragment>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Name</TableCell>
+            <TableCell sortDirection={"asc"}>Status</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {list.map((item: IGoodsListItem) => (
+            <GoodsListItem key={item.id} item={item} onClick={_onEditClick} />
+          ))}
+        </TableBody>
+      </Table>
+      <Button
+        variant="fab"
+        color="primary"
+        aria-label="add"
+        style={addButtonStyle}
+        onClick={_onClickNew}
+      >
+        <CreateNewFolder />
+      </Button>
+      <GoodsItemWindow />
+    </React.Fragment>
+  );
 };
 
 const mapStateToProps = (state: IApplicationState) => ({
