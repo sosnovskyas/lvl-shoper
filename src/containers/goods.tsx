@@ -3,8 +3,6 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { GoodsList } from "../components/goods-list";
-import { Indicator } from "../components/indicator";
-import { LoginForm } from "../components/login-form";
 import { IApplicationState } from "../modules/store/store-types";
 
 export interface IHomeContainerProps extends Dispatch<any> {
@@ -12,7 +10,7 @@ export interface IHomeContainerProps extends Dispatch<any> {
   connected: boolean;
 }
 
-class HomeContainer extends React.Component<IHomeContainerProps> {
+class GoodsContainer extends React.Component<IHomeContainerProps> {
   private _style: React.CSSProperties = {
     marginTop: 50,
     height: "100%",
@@ -22,11 +20,7 @@ class HomeContainer extends React.Component<IHomeContainerProps> {
   };
 
   public render(): React.ReactElement<void> {
-    const { user, connected } = this.props;
-
-    return (
-      <div style={this._style}>{user ? <GoodsList /> : <LoginForm />}</div>
-    );
+    return <GoodsList />;
   }
 }
 
@@ -35,4 +29,4 @@ const mapStateToProps = (state: IApplicationState) => ({
   connected: state.firebase.connected
 });
 
-export const Home = connect(mapStateToProps)(HomeContainer);
+export const Goods = connect(mapStateToProps)(GoodsContainer);

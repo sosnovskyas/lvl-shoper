@@ -1,7 +1,6 @@
 import {Action} from 'redux';
+import {SagaIterator} from 'redux-saga';
 import {call, cps, put, takeEvery} from 'redux-saga/effects';
-import {GOODS_WINDOW_SAVE} from '../goods/goods-constants';
-import {IGoodsListItem} from '../goods/goods-types';
 import {
   firebaseSignInFailed,
   firebaseSignInSuccess,
@@ -33,7 +32,7 @@ function* firebaseSignOut(action: Action) {
   }
 }
 
-export function* firebaseSaga(): any {
+export function* firebaseSaga(): SagaIterator {
   yield takeEvery(FIREBASE_SIGNIN_REQUEST, firebaseSignIn);
   yield takeEvery(FIREBASE_SIGNOUT_REQUEST, firebaseSignOut);
 }

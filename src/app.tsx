@@ -4,7 +4,7 @@ import * as React from "react";
 import { connect, DispatchProp } from "react-redux";
 import { LoginForm } from "./components/login-form";
 import { MainMenu } from "./components/main-menu";
-import { Home } from "./containers/home";
+import { Goods } from "./containers/goods";
 import { IApplicationState } from "./modules/store/store-types";
 
 export interface IAppContainerProps extends DispatchProp<any> {
@@ -20,7 +20,7 @@ class AppContainer extends React.Component<IAppContainerProps> {
       return (
         <React.Fragment>
           <MainMenu />
-          <Home />
+          <Goods />
         </React.Fragment>
       );
     } else {

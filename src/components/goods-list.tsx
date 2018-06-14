@@ -51,7 +51,7 @@ Goods.on("value", (snapshot: firebase.database.DataSnapshot) => {
 const GoodsListComponent: React.SFC<IGoodsListProps> = (
   props: IGoodsListProps
 ): React.ReactElement<IGoodsListProps> => {
-  const { loading, list, dispatch } = props;
+  const { list, dispatch } = props;
   const _onEditClick = (item: IGoodsListItem) =>
     dispatch(goodsEditWindowOpen(item));
   const _onClickNew = () => dispatch(goodsNewWindowOpen());
